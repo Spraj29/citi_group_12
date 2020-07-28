@@ -1,0 +1,198 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+  .header {
+    overflow: hidden;
+    background-color:#7eb0c2;
+    padding: 20px 10px;
+  }
+  
+  .header a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px; 
+    font-weight:800;
+    border-radius: 4px;
+  }
+  
+  .header-right {
+    float: right;
+  }
+  
+  .column {
+  float: left;
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+form{
+  text-align: center;
+}
+input[type=text] {
+  width:75%;
+  padding: 12px 20px;
+  margin: 8px;
+  box-sizing: border-box;
+  border: 1px solid #555;
+  outline: none;
+
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+.button {
+  background-color: #008CBA; /* Green */
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius:10px;
+}
+/*table, th , td  {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+    margin-left: 25%;
+  }
+  */
+  table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  
+}
+  table tr:nth-child(odd) {
+    background-color: #f1f1f1;
+  }
+  table tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+  @media screen and (max-width: 600px) {
+    .header a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    
+    .header-right {
+      float: none;
+    }
+    .column {
+    width: 100%;
+  }
+
+
+  }
+  </style>
+  
+<div class="header">
+
+  <a> 
+    <i class="fa fa-user" style="font-size:24px"></i>
+       Welcome Vedangi</a>
+  <div class="header-right">
+    
+    <a href="#">
+      <i class="fa fa-sign-out" style="font-size:20px;color:red"></i>
+      LogOut</a>
+  </div>
+</div>
+<div class="row">
+  <div class="column" style="background-color:white;">
+    <form >
+      <div class="form-group">
+        <label for="marketCap" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-weight: bolder;">Market Capital </label>
+        <input type="number" class="form-control" id="marketCap" required [(ngModel)]="u.marketCap" name="marketCap">
+       
+        <select>
+          <option value=100000000>Bn</option>
+          <option value=1000000000>Tn</option>
+        </select>
+      </div>
+      
+      <br/>
+    <button (click)="getCompanyList(u.marketCap)" class='button'>Search</button>
+  </form>
+  <br/>
+    <table>
+    <thead>
+      <tr>            
+        <th>CompanyName</th>
+        <th>Symbol</th>
+        <th>Market Cap</th>
+        <th>EPS</th>
+        <th>PE</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees | async">
+        <td>{{employee.companyName}}</td>
+        <td>{{employee.symbol}}</td>
+        <td>{{employee.marketCap}}</td>
+        <td>{{employee.forwardEps}}</td>
+        <td>{{employee.forwardPE}}</td>
+        <td><button (click)="(saveEmployee(employee,u.Name))" class="button" style="background-color: #48e880">Save</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  
+  <div class="column" style="background-color:white;">
+    <b>Your Saved Recommendations</b>
+    <table class="table table-striped" >
+        <thead>
+          <tr>            
+            <th>CompanyName</th>
+            <th>Symbol</th>
+            <th>Market Cap</th>
+            <th>EPS</th>  
+            <th>PE</th>    
+            <th>Action</th>     
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let company of companies | async">
+            <td>{{company.companyName}}</td>
+            <td>{{company.symbol}}</td>
+            <td>{{company.marketCap}}</td>
+            <td>{{company.forwardEps}}</td>
+            <td>{{company.forwardPE}}</td>
+            <td><button (click)="(deleteCompany(company.symbol,'Vinita'))" class="button" style="background-color:#f54952">Delete</button></td>                        
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+      <span style="float:right; font-size:8pt">All Rights Reserved 2020 @CitiGroup12</span>
+  </div>
+</footer>
