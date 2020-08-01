@@ -22,12 +22,12 @@ public class loginservice {
 		{
 			if(user.getName().equals(Username)&& user.getPassword().equals(Password))
 			{
-				return "Success";
+				return "{\"message\":\"Success\"}";
 			}
 					
 		}
 		
-		return "Failure";
+		return "{\"message\":\"Failure\"}";
 		
 	}
 	List<UserDetails> GetUSerDetails() {

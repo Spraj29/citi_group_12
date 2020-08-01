@@ -58,13 +58,14 @@ public class DashboardServicesController {
 		
 			@GetMapping("/saveCompanyDetails")
 				@CrossOrigin(origins = "*", allowedHeaders = "*")
-             public void saveCompanyDetails(@RequestParam(value = "symbols")String  symbols,@RequestParam(value = "name")String  name,@RequestParam(value = "marketcap")Long  marketcap,@RequestParam(value = "forwardeps")Double  forwardeps,@RequestParam(value = "Companyname")String  Companyname ) throws Exception {
+             public void saveCompanyDetails(@RequestParam(value = "symbols")String  symbols,@RequestParam(value = "name")String  name,@RequestParam(value = "marketcap")Long  marketcap,@RequestParam(value = "forwardeps")Double  forwardeps,@RequestParam(value = "Companyname")String  Companyname,@RequestParam(value = "forwardpe")Double  forwardpe ) throws Exception {
 				
 				
 				Company c=new Company();
 				c.setCompanyName(Companyname);
 				c.setSymbol(symbols);
 				c.setForwardEps(forwardeps);
+				c.setForwardPE(forwardpe);
 				c.setMarketCap(marketcap);
 				
 				
