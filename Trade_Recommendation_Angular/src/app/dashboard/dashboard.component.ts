@@ -4,6 +4,8 @@ import { Company } from "./../data";
 import { Router } from '@angular/router';
 import { Observable } from "rxjs";
 import { user } from "./../user";
+import { loginOutput } from '../loginOutput';
+//import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,18 +13,32 @@ import { user } from "./../user";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  u: user = new user('Vinita','5555');
+  message:string;
+  //u: user = new user('Vinita','5555');
+  u:user;
   companies: Observable<Company[]>;
   companys: Observable<Company[]>;
   multiplier: number = 1000000;
 
   constructor(private DataService: DataService,
+   // private login: LoginComponent, 
     private router: Router) {}
     
    ngOnInit(){
+    //this.login.currentMessage.subscribe(message => this.message = message)
+    this.DataService.currentMessage.subscribe(
+      (message: any) => {
+        this.message=message;
+        console.log(this.message);         
+      },
+      error => console.log(error));
+
+    
+    console.log(this.message);
+      this.u=new user(this.message, "4567");
      console.log(this.u.Name);
      //console.log("Reload");
-     this.companies=this.DataService.getSavedData();
+     this.companies=this.DataService.getSavedData(this.u.Name);
     
    }
   
@@ -40,7 +56,7 @@ export class DashboardComponent implements OnInit {
   
 
 
-    saveCompany(e: Company, name: String) {
+    async saveCompany(e: Company, name: String) {
       //console.log("save")
       this.DataService.saveCompany(e,name)
         .subscribe(
@@ -48,10 +64,14 @@ export class DashboardComponent implements OnInit {
             console.log(data);         
           },
           error => console.log(error));
+
+          await this.delay(500);
+          this.companies=this.DataService.getSavedData(this.u.Name);
+
           
     }
 
-    deleteCompany(symbol: string, name: String){
+    async deleteCompany(symbol: string, name: String){
       console.log("Delete");
       console.log(symbol,name)
      // this.DataService.deleteCompany(symbol,name);
@@ -64,6 +84,8 @@ export class DashboardComponent implements OnInit {
 
       console.log("deletedone");
     //  this.reload();
+    await this.delay(500);
+          this.companies=this.DataService.getSavedData(this.u.Name);
     }
 
     logout(){
@@ -73,6 +95,10 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/login']);
     }
 
-    exit() { location.reload(); } 
-
+//    exit() { location.reload(); } 
+    delay(ms: number) {
+      return new Promise( resolve => setTimeout(resolve, ms) );
+      }
+  
+      //<button [routerLink]="['/dashboard']" (click)="exit()" style="float: right ;"> <i class="fa fa-refresh"></i> </button>
 }

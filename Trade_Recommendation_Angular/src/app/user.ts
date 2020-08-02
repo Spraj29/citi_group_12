@@ -1,9 +1,9 @@
 export class user{
    
-    Name:String
+    Name:string
     Password:String
     marketCap: number
-    constructor(Name: String,Password: String){
+    constructor(Name: string,Password: String){
       this.Name=Name;
       this.Password=Password;
     }
