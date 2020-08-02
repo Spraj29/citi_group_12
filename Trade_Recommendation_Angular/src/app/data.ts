@@ -1,4 +1,4 @@
-export class Employee {
+export class Company {
   symbol:String
   marketCap:Number
   forwardPE:Number
