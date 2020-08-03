@@ -18,7 +18,7 @@
  }
  
  button{
-  background-color: #56baed;
+  background-color: #003A72;
   color: white;
   width: 80%;
   margin: 5px;
@@ -30,7 +30,7 @@
 }
 
 
-input[type=text] {
+input {
   color: #0d0d0d;
   padding: 15px;
   text-align: center;
@@ -45,7 +45,7 @@ input[type=text] {
   <div class="wrapper">
     <form action='./dashboard'>
       <input type="text" id="username" name="username" required [(ngModel)]="u.Name" placeholder="username">
-      <input type="text" id="password"   name="password" required [(ngModel)]="u.Password" placeholder="password">
+      <input type="password" id="password"   name="password" required [(ngModel)]="u.Password" placeholder="password">
       <button class="button" (click)="loginUser(u.Name,u.Password)">Submit</button>
     </form>
 </div>

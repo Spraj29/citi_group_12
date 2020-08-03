@@ -38,6 +38,9 @@ export class DashboardComponent implements OnInit {
       this.u=new user(this.message, "4567");
      console.log(this.u.Name);
      //console.log("Reload");
+     if(this.u.Name=== ' '){
+       this.router.navigate(['/login']);
+     }
      this.companies=this.DataService.getSavedData(this.u.Name);
     
    }
@@ -48,6 +51,7 @@ export class DashboardComponent implements OnInit {
   
 
   getCompanyList(marketCap: number)  {
+    alert("Fetching recommendations for you...");
     console.log("List");
     console.log(this.multiplier);
     this.companys = this.DataService.getCompanyList(marketCap*(this.multiplier));

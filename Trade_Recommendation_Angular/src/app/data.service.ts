@@ -14,7 +14,7 @@ export class DataService {
   private baseUrl = 'http://localhost:8080/getTop5companies?marketCap=';
   public  saveUrl;
   
-  private messageSource = new BehaviorSubject('User');
+  private messageSource = new BehaviorSubject(' ');
   currentMessage = this.messageSource.asObservable();
   constructor(
     private http: HttpClient) { }
